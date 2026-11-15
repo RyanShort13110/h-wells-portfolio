@@ -208,7 +208,7 @@ h2 em,h1 em { font-weight: 400; font-style: italic; color: #a96765; }
 .result-rule { height: 1px; background: #deded9; width: 100%; margin: 22px 0 17px; }
 .result-support { color: var(--navy); font-size: 12px; font-weight: 700; margin-bottom: 8px; }
 .result-context { color: #6c7b84; line-height: 1.6; font-size: 12px; }
-.results-disclaimer { font-size: 11px; line-height: 1.7; color: #69727a; max-width: 720px; margin: 30px 0 0; }
+.results-disclaimer {display:none !important; font-size: 11px; line-height: 1.7; color: #69727a; max-width: 720px; margin: 30px 0 0; }
 
 /* Experience */
 .experience { background: var(--paper); }
