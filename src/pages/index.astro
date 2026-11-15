@@ -11,6 +11,17 @@ const clients = [...new Set(samples.map((sample) => sample.client))];
 const year = new Date().getFullYear();
 const external = { target: '_blank', rel: 'noopener noreferrer' };
 const headshot = site.headshot?.trim();
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString();
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  '@id': `${canonicalUrl}#person`,
+  name: site.name,
+  url: canonicalUrl,
+  jobTitle: site.role,
+  description: site.seoDescription,
+  ...(site.linkedin?.trim() ? { sameAs: [site.linkedin.trim()] } : {})
+};
 // Pages CMS stores the public URL of the selected document in site.json.
 // Only link a PDF from this portfolio's documents directory.
 const resumePath = site.resumeFile?.trim() ?? '';
@@ -25,6 +36,12 @@ const resumeHref = /^\/documents\/[a-zA-Z0-9_\-./%]+\.pdf$/i.test(resumePath) &&
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#F7F5F0" />
   <meta name="description" content={site.seoDescription} />
+  <link rel="canonical" href={canonicalUrl} />
+  <meta property="og:url" content={canonicalUrl} />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={site.seoTitle} />
+  <meta name="twitter:description" content={site.seoDescription} />
+  <script type="application/ld+json" set:html={JSON.stringify(personSchema).replace(/</g, '\\u003c')} />
   <meta property="og:type" content="website" />
   <meta property="og:title" content={site.seoTitle} />
   <meta property="og:description" content={site.seoDescription} />
