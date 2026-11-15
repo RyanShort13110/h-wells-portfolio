@@ -6,10 +6,11 @@ A lightweight, one-page portfolio for **Helen Wells, SEO Copywriter & Marketing 
 
 - A responsive Astro static website, no backend, database, or JavaScript framework.
 - Original design with deep navy `#243B53`, dusty rose `#D9A7A0`, and warm ivory `#F7F5F0`.
-- Hero, About, Skills, Writing, SEO results, Experience, and Contact sections.
+- Hero, About (with optional education), Skills, Writing, SEO results, Experience, and Contact sections.
 - **All 17 supplied writing samples**, grouped into six publications, with a large Grayton Beach feature.
 - **Three SEO results**, explicitly described as *team outcomes Helen contributed to*.
 - Optional author photo support, with a typographic placeholder until she supplies one.
+- **Optional downloadable résumé buttons**, controlled by a PDF upload/selection in Pages CMS. The site hides the buttons until a PDF is selected.
 - Pages CMS configuration so Helen can update text, skills, samples, results, and contact details without editing code.
 - Keyboard-accessible native details/summary writing archive, mobile navigation, reduced-motion support, basic SEO metadata.
 
@@ -44,7 +45,7 @@ Astro outputs to `dist/`. This repository intentionally has **no package-lock.js
 1. Sign in at https://app.pagescms.org with the GitHub account that owns the project.
 2. Allow the Pages CMS GitHub App to access **only this portfolio repository**.
 3. Open the repository. It reads `.pages.yml` and should show:
-   - **Introduction, About & Contact**, `src/data/site.json`
+   - **Introduction, About & Contact**, `src/data/site.json` (includes education and a résumé PDF picker)
    - **Skills**, `src/data/skills.json`
    - **Writing samples**, `src/data/samples.json`
    - **SEO results**, `src/data/results.json`
@@ -56,7 +57,7 @@ This isn't an inline WYSIWYG editor; changes are saved to GitHub first and appea
 
 All public text and links live in the four JSON files in `src/data/`.
 
-- `site.json`: name, title, headlines, introduction, About, Experience, contact, optional `headshot`, SEO metadata.
+- `site.json`: name, title, headlines, introduction, About, optional education, Experience, contact, optional `headshot`, `resumeFile`, SEO metadata.
 - `skills.json`: named skill categories and item lists.
 - `samples.json`: articles with `title`, `client`, `url`, `category`, `summary`, `featured`, and `spotlight`.
 - `results.json`: SEO metric cards.
@@ -64,6 +65,16 @@ All public text and links live in the four JSON files in `src/data/`.
 Keep **exactly one** article's `spotlight` set to `true` to define the large featured piece. `featured: true` creates one of the four smaller cards when not the spotlight. The writing archive always lists all articles, whether featured or not.
 
 For an optional headshot, upload an image through Pages CMS and select its path in `headshot`. Otherwise the monogram is intentional.
+
+### Uploading or replacing Helen’s résumé
+
+1. Open **Pages CMS → Website content → Introduction, About & Contact**.
+2. Find **Résumé PDF (optional)**. Use **Upload** or **Choose file** to select a PDF; the file picker is connected to the **Résumés and documents** media library. You can also upload in the Media tab, then select that file here.
+3. Save the page in Pages CMS. It commits the `resumeFile` path into `src/data/site.json`; Netlify then deploys the update.
+4. The **Download résumé** buttons in the hero and contact area will automatically link to the new PDF. **No code edits and no manual URL typing required.**
+5. To update it later, upload the replacement PDF and select it in the same field. Previous files can be deleted from Media once no longer used, but beware that an old URL may still be cached or bookmarked.
+
+The download link is intentionally hidden while `resumeFile` is empty. The PDF was **not attached to this V2 package**, so Helen can choose the version she approves for public download. Use the content checker after uploading to ensure the referenced file exists.
 
 ## Before putting Helen's name on a public site
 

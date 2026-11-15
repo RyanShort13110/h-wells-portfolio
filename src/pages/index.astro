@@ -11,6 +11,12 @@ const clients = [...new Set(samples.map((sample) => sample.client))];
 const year = new Date().getFullYear();
 const external = { target: '_blank', rel: 'noopener noreferrer' };
 const headshot = site.headshot?.trim();
+// Pages CMS stores the public URL of the selected document in site.json.
+// Only link a PDF from this portfolio's documents directory.
+const resumePath = site.resumeFile?.trim() ?? '';
+const resumeHref = /^\/documents\/[a-zA-Z0-9_\-./%]+\.pdf$/i.test(resumePath) && !resumePath.includes('..')
+  ? resumePath
+  : null;
 ---
 <!doctype html>
 <html lang="en">
@@ -60,6 +66,7 @@ const headshot = site.headshot?.trim();
           <div class="hero-actions">
             <a class="btn btn-dark" href="#writing">Explore my writing <span aria-hidden="true">↗</span></a>
             <a class="text-link" href="#contact">Get in touch <span aria-hidden="true">↗</span></a>
+            {resumeHref && <a class="btn btn-resume" href={resumeHref} download>Download résumé <span aria-hidden="true">↓</span></a>}
           </div>
           <div class="hero-proof">
             <span class="proof-decoration" aria-hidden="true">✳</span>
@@ -103,6 +110,7 @@ const headshot = site.headshot?.trim();
           <p class="section-kicker"><span>01</span> A LITTLE ABOUT ME</p>
           <h2 id="about-heading">{site.aboutHeading}</h2>
           <p class="body-large">{site.aboutBody}</p>
+          {site.education && <p class="about-education"><strong>Education</strong> {site.education}</p>}
           <blockquote><span aria-hidden="true">“</span>{site.aboutNote}<span aria-hidden="true">”</span></blockquote>
           <a class="inline-arrow" href="#skills">A little more about my work <span aria-hidden="true">↗</span></a>
         </div>
@@ -234,6 +242,7 @@ const headshot = site.headshot?.trim();
         <div class="contact-actions">
           <a class="btn btn-light" href={`mailto:${site.email}`}>Email me <span aria-hidden="true">↗</span></a>
           <a class="contact-link" href={site.linkedin} {...external}>Connect on LinkedIn <span aria-hidden="true">↗</span></a>
+          {resumeHref && <a class="btn btn-resume-light" href={resumeHref} download>Download résumé <span aria-hidden="true">↓</span></a>}
         </div>
         <div class="contact-flower" aria-hidden="true">✳</div>
       </div>

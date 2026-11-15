@@ -10,3 +10,10 @@ These items should be checked directly with Helen; they're not blockers for loca
 - **Client articles:** 17 links supplied, all included. Third-party destinations may change. Some were reachable during spot checks; do a manual final click-through.
 - **Domain:** None has been purchased or connected. Use free Netlify subdomain at first.
 - **CMS:** GitHub app installation and Netlify account setup must be done by Helen or with her permission.
+
+## V2 notes for Helen
+
+- Please review the expanded About text describing Georgia State University, literature/journalism studies, and discovering content marketing during an internship. This is adapted from your public Bluetent profile, not your own approved portfolio wording.
+- Please review the refined Experience copy and confirm your preferred title, employment dates, and specific responsibilities. The site does not invent dates.
+- Please upload your latest résumé PDF through Pages CMS, then choose it in the **Résumé PDF** field; the download button stays hidden until that happens.
+- Published résumé PDFs are publicly accessible, so remove any personal information you would not want visible on the web.

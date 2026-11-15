@@ -9,6 +9,15 @@ const fail = (message) => { console.error(`✖ ${message}`); process.exitCode = 
 for (const field of ['name','role','headlineFirst','headlineAccent','introduction','email','linkedin']) {
   if (!site[field]) fail(`Missing site.${field}`);
 }
+if (site.resumeFile) {
+  const path = site.resumeFile;
+  if (typeof path !== 'string' || !/^\/documents\/[a-zA-Z0-9_\-./%]+\.pdf$/i.test(path) || path.includes('..')) {
+    fail('site.resumeFile must be a local /documents/*.pdf path selected using Pages CMS');
+  } else {
+    const file = new URL(`../public${decodeURIComponent(path)}`, import.meta.url);
+    if (!fs.existsSync(file)) fail(`Résumé PDF not found: ${path}`);
+  }
+}
 if (!Array.isArray(samples) || !samples.length) fail('No writing samples');
 else {
   for (const [index,sample] of samples.entries()) {

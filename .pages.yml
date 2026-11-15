@@ -1,7 +1,16 @@
 media:
-  input: public/images
-  output: /images
-  rename: safe
+  - name: images
+    label: Photos and images
+    input: public/images
+    output: /images
+    extensions: [png, jpg, jpeg, webp, svg]
+    rename: safe
+  - name: documents
+    label: Résumés and documents
+    input: public/documents
+    output: /documents
+    extensions: [pdf]
+    rename: safe
 
 content:
   - name: website
@@ -23,11 +32,24 @@ content:
           - { name: aboutHeading, label: About heading, type: string }
           - { name: aboutBody, label: About paragraph, type: text }
           - { name: aboutNote, label: Short personal note, type: text }
+          - { name: education, label: Education (optional), type: string, description: "Add education details to the About section." }
           - { name: experienceHeading, label: Experience heading, type: string }
           - { name: experienceBody, label: Experience text, type: text }
           - { name: experienceCompany, label: Company label, type: string }
           - { name: experienceFocus, label: Experience focus, type: string }
-          - { name: headshot, label: Optional headshot, type: image }
+          - name: resumeFile
+            label: Résumé PDF (optional)
+            type: file
+            description: "Upload or select the latest PDF. The Download résumé button appears automatically after you save. Replace this selection whenever your résumé changes."
+            options:
+              media: documents
+              extensions: [pdf]
+              rename: safe
+          - name: headshot
+            label: Optional headshot
+            type: image
+            options:
+              media: images
           - { name: email, label: Contact email, type: string }
           - { name: linkedin, label: LinkedIn URL, type: string }
           - { name: seoTitle, label: Search engine title, type: string }
