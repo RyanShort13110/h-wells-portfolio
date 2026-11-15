@@ -54,6 +54,20 @@ content:
           - { name: linkedin, label: LinkedIn URL, type: string }
           - { name: seoTitle, label: Search engine title, type: string }
           - { name: seoDescription, label: Search engine description, type: text }
+      - name: sections
+        label: Section text (writing & SEO results)
+        type: file
+        path: src/data/sections.json
+        format: json
+        fields:
+          - name: resultsIntro
+            label: SEO results intro
+            type: text
+            description: "Text above the SEO results cards. Update this if you add results from a different client or project."
+          - name: resultsDisclaimer
+            label: SEO results attribution note
+            type: text
+            description: "Source, reporting period, and team contribution note beneath the SEO results. Keep claims accurate when updating results."
       - name: skills
         label: Skills
         type: file
@@ -78,8 +92,10 @@ content:
           - { name: url, label: Published article URL, type: string, required: true }
           - { name: category, label: Type of writing, type: string }
           - { name: summary, label: Short description (optional), type: text }
-          - { name: featured, label: Show in featured selections, type: boolean }
-          - { name: spotlight, label: Make the large featured story, type: boolean }
+          - { name: featured, label: Show in featured selections, type: boolean, description: "Each selected article appears in the featured cards automatically; no limit." }
+          - { name: spotlight, label: Make the large featured story, type: boolean, description: "Choose one article. If more than one is checked, the first checked article in this list is used. If none is checked, the first featured article appears." }
+          - { name: spotlightArtLabel, label: Featured artwork small label (optional), type: string, description: "Only used when this article is the large featured story. Example: FEATURED GUIDE. Defaults to FEATURED STORY." }
+          - { name: spotlightArtTitle, label: Featured artwork big text (optional), type: string, description: "Short text in the illustrated panel when this article is the large featured story. Example: GRAYTON BEACH. Defaults to the publication name." }
       - name: results
         label: SEO results
         type: file

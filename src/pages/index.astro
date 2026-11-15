@@ -4,9 +4,21 @@ import site from '../data/site.json';
 import skills from '../data/skills.json';
 import samples from '../data/samples.json';
 import results from '../data/results.json';
+import sections from '../data/sections.json';
 
-const spotlight = samples.find((sample) => sample.spotlight) ?? samples[0];
-const featured = samples.filter((sample) => sample.featured && sample !== spotlight).slice(0, 4);
+// Pages CMS uses independent checkboxes for spotlight articles. If more than one
+// is checked, show the first checked article rather than breaking the deployment.
+// With none checked, use the first featured article (or first published sample).
+const spotlight = samples.find((sample) => sample.spotlight)
+  ?? samples.find((sample) => sample.featured)
+  ?? samples[0];
+// Show every selected feature; an editor should not have to change code to add one.
+const featured = samples.filter((sample) => sample.featured && sample !== spotlight);
+// Artwork follows the chosen article. Helen can optionally specify short artwork
+// copy for each sample in Pages CMS; fallback uses that sample's publication.
+const spotlightArtLabel = (spotlight?.spotlightArtLabel || 'FEATURED STORY').trim();
+const spotlightArtTitle = (spotlight?.spotlightArtTitle || spotlight?.client || 'SELECTED WORK').trim();
+const spotlightCategory = (spotlight?.category || 'Writing').toUpperCase();
 const clients = [...new Set(samples.map((sample) => sample.client))];
 const year = new Date().getFullYear();
 const external = { target: '_blank', rel: 'noopener noreferrer' };
@@ -168,13 +180,13 @@ const resumeHref = /^\/documents\/[a-zA-Z0-9_\-./%]+\.pdf$/i.test(resumePath) &&
             <div class="spotlight-wave wave-one"></div>
             <div class="spotlight-wave wave-two"></div>
             <div class="spotlight-wave wave-three"></div>
-            <span class="spotlight-art-label">FEATURED GUIDE<br/><strong>GRAYTON BEACH</strong></span>
+            <span class="spotlight-art-label">{spotlightArtLabel}<br/><strong>{spotlightArtTitle}</strong></span>
           </div>
           <div class="spotlight-copy">
-            <p class="mini-label">FEATURED STORY / {spotlight.category.toUpperCase()}</p>
+            <p class="mini-label">FEATURED STORY / {spotlightCategory}</p>
             <h3>{spotlight.title}</h3>
             <p>{spotlight.summary || 'A selected piece from my published writing portfolio.'}</p>
-            <div class="card-foot"><span>{spotlight.client}</span><a href={spotlight.url} {...external} aria-label={`Read ${spotlight.title} on ${spotlight.client}`}>Read the guide <span aria-hidden="true">↗</span></a></div>
+            <div class="card-foot"><span>{spotlight.client}</span><a href={spotlight.url} {...external} aria-label={`Read ${spotlight.title} on ${spotlight.client}`}>Read the article <span aria-hidden="true">↗</span></a></div>
           </div>
         </div>
         <div class="featured-grid">
@@ -216,7 +228,7 @@ const resumeHref = /^\/documents\/[a-zA-Z0-9_\-./%]+\.pdf$/i.test(resumePath) &&
         <div class="section-intro results-intro" data-reveal>
           <p class="section-kicker"><span>04</span> THE IMPACT</p>
           <h2 id="results-heading">Good writing makes<br /><em>a measurable difference.</em></h2>
-          <p>A few search performance highlights from content work with Frias Properties of Aspen.</p>
+          <p>{sections.resultsIntro}</p>
         </div>
         <div class="results-grid">
           {results.map((result) => (
@@ -230,7 +242,7 @@ const resumeHref = /^\/documents\/[a-zA-Z0-9_\-./%]+\.pdf$/i.test(resumePath) &&
             </article>
           ))}
         </div>
-        <p class="results-disclaimer">September 2026 performance figures provided from team reporting. These reflect collaborative content and SEO efforts that Helen contributed to, rather than individual attribution.</p>
+        <p class="results-disclaimer">{sections.resultsDisclaimer}</p>
       </div>
     </section>
 

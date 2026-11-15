@@ -129,9 +129,11 @@ h2 em,h1 em { font-weight: 400; font-style: italic; color: #a96765; }
 .split-header { display: flex; justify-content: space-between; align-items: end; gap: 60px; }
 .split-header h2 { margin-bottom: 50px; }
 .split-header p:not(.section-kicker) { max-width: 295px; margin-bottom: 55px; }
-.skills-grid { border-top: 1px solid #cbd0cc; display: grid; grid-template-columns: repeat(3,1fr); }
-.skill-group { position: relative; padding: 35px 40px 10px 0; }
-.skill-group + .skill-group { padding-left: 40px; border-left: 1px solid #cbd0cc; }
+/* Auto-fit groups without assuming there are exactly three. Every card owns its
+   separator, so wrapped rows remain tidy even when Helen adds a fourth/fifth. */
+.skills-grid { border-top: 1px solid #cbd0cc; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); }
+.skill-group { position: relative; min-width: 0; padding: 35px 28px 24px; border-right: 1px solid #cbd0cc; border-bottom: 1px solid #cbd0cc; }
+.skill-group:first-child { padding-left: 0; }
 .skill-index { font-size: 11px; color: #9d807b; }
 .skill-group h3 { font: 500 1.6rem var(--serif); letter-spacing: -.025em; margin: 20px 0 22px; }
 .skill-group ul { list-style: none; padding: 0; margin: 0; }
@@ -150,8 +152,8 @@ h2 em,h1 em { font-weight: 400; font-style: italic; color: #a96765; }
 .wave-one { top: 48%; background: #8fa9ad; transform: rotate(8deg); }
 .wave-two { top: 61%; background: #6a9096; transform: rotate(-7deg); }
 .wave-three { top: 76%; background: #50777d; transform: rotate(8deg); }
-.spotlight-art-label { position: absolute; bottom: 28px; left: 32px; color: white; font-size: 10px; font-weight: 700; letter-spacing: .16em; line-height: 2; }
-.spotlight-art-label strong { font: 500 2.9rem/1.1 var(--serif); letter-spacing: -.035em; }
+.spotlight-art-label { position: absolute; bottom: 28px; left: 32px; right: 25px; color: white; font-size: 10px; font-weight: 700; letter-spacing: .16em; line-height: 2; overflow-wrap: anywhere; }
+.spotlight-art-label strong { display: block; font: 500 clamp(1.65rem, 2.5vw, 2.9rem)/1.1 var(--serif); letter-spacing: -.035em; margin-top: 5px; text-wrap: balance; }
 .spotlight-copy { padding: clamp(38px, 5.2vw, 78px); display: flex; flex-direction: column; align-items: start; justify-content: center; }
 .spotlight-copy h3 { margin: 22px 0 23px; font: 500 clamp(2rem, 3vw, 3.3rem)/1.13 var(--serif); letter-spacing: -.04em; }
 .spotlight-copy > p:not(.mini-label) { color: #63717a; font-size: 15px; line-height: 1.75; }
@@ -289,8 +291,7 @@ h2 em,h1 em { font-weight: 400; font-style: italic; color: #a96765; }
   .split-header h2 { margin-bottom: 18px; }
   .split-header p:not(.section-kicker) { margin-bottom: 38px; }
   .skills-grid { grid-template-columns: 1fr; }
-  .skill-group { padding: 25px 0; }
-  .skill-group + .skill-group { padding: 25px 0; border-left: 0; border-top: 1px solid #cbd0cc; }
+  .skill-group, .skill-group:first-child { padding: 25px 0; border-right: 0; }
   .skill-group h3 { margin: 12px 0; }
   .skill-group li { padding: 8px 0; }
   .writing-head { text-align: left; margin-bottom: 35px; }
