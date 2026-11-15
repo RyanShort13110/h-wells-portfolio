@@ -7,7 +7,7 @@ const skills = read('skills');
 const results = read('results');
 const sections = read('sections');
 const fail = (message) => { console.error(`✖ ${message}`); process.exitCode = 1; };
-for (const field of ['name','role','headlineFirst','headlineAccent','introduction','email','linkedin']) {
+for (const field of ['name','role','headlineFirst','headlineAccent','introduction','email','linkedin','seoTitle','seoDescription']) {
   if (!site[field]) fail(`Missing site.${field}`);
 }
 if (site.resumeFile) {
@@ -17,6 +17,17 @@ if (site.resumeFile) {
   } else {
     const file = new URL(`../public${decodeURIComponent(path)}`, import.meta.url);
     if (!fs.existsSync(file)) fail(`Résumé PDF not found: ${path}`);
+  }
+}
+if (site.headshot) {
+  const path = site.headshot;
+  if (typeof path !== 'string' || !/^\/images\/[a-zA-Z0-9_\-./%]+\.(?:png|jpe?g|webp|svg)$/i.test(path) || path.includes('..')) {
+    fail('site.headshot must be a local /images/ image path selected using Pages CMS');
+  } else {
+    let image;
+    try { image = new URL(`../public${decodeURIComponent(path)}`, import.meta.url); }
+    catch { fail(`Invalid headshot path: ${path}`); }
+    if (image && !fs.existsSync(image)) fail(`Headshot image not found: ${path}`);
   }
 }
 if (!Array.isArray(samples) || !samples.length) fail('No writing samples');
@@ -36,6 +47,9 @@ else {
   }
 }
 if (!Array.isArray(skills)) fail('Skills must be an array');
+else for (const [index, group] of skills.entries()) {
+  if (!group?.heading || !Array.isArray(group.items)) fail(`Skill group #${index+1} needs a name and an items list`);
+}
 if (!Array.isArray(results)) fail('Results must be an array');
 for (const field of ['resultsIntro','resultsDisclaimer']) {
   if (typeof sections[field] !== 'string') fail(`Section text ${field} must be a string`);
