@@ -1,0 +1,73 @@
+media:
+  input: public/images
+  output: /images
+  rename: safe
+
+content:
+  - name: website
+    label: Website content
+    type: group
+    items:
+      - name: site
+        label: Introduction, About & Contact
+        type: file
+        path: src/data/site.json
+        format: json
+        fields:
+          - { name: name, label: Name, type: string, required: true }
+          - { name: role, label: Professional title, type: string, required: true }
+          - { name: eyebrow, label: Small line above headline, type: string }
+          - { name: headlineFirst, label: Headline line 1, type: string }
+          - { name: headlineAccent, label: Headline line 2, type: string }
+          - { name: introduction, label: Introduction, type: text }
+          - { name: aboutHeading, label: About heading, type: string }
+          - { name: aboutBody, label: About paragraph, type: text }
+          - { name: aboutNote, label: Short personal note, type: text }
+          - { name: experienceHeading, label: Experience heading, type: string }
+          - { name: experienceBody, label: Experience text, type: text }
+          - { name: experienceCompany, label: Company label, type: string }
+          - { name: experienceFocus, label: Experience focus, type: string }
+          - { name: headshot, label: Optional headshot, type: image }
+          - { name: email, label: Contact email, type: string }
+          - { name: linkedin, label: LinkedIn URL, type: string }
+          - { name: seoTitle, label: Search engine title, type: string }
+          - { name: seoDescription, label: Search engine description, type: text }
+      - name: skills
+        label: Skills
+        type: file
+        path: src/data/skills.json
+        format: json
+        list: true
+        fields:
+          - { name: heading, label: Group name, type: string, required: true }
+          - name: items
+            label: Skills in this group
+            type: string
+            list: true
+      - name: samples
+        label: Writing samples
+        type: file
+        path: src/data/samples.json
+        format: json
+        list: true
+        fields:
+          - { name: title, label: Article title, type: string, required: true }
+          - { name: client, label: Client or publication, type: string, required: true }
+          - { name: url, label: Published article URL, type: string, required: true }
+          - { name: category, label: Type of writing, type: string }
+          - { name: summary, label: Short description (optional), type: text }
+          - { name: featured, label: Show in featured selections, type: boolean }
+          - { name: spotlight, label: Make the large featured story, type: boolean }
+      - name: results
+        label: SEO results
+        type: file
+        path: src/data/results.json
+        format: json
+        list: true
+        fields:
+          - { name: project, label: Project, type: string, required: true }
+          - { name: metric, label: Big number (e.g. +152%), type: string }
+          - { name: unit, label: Metric label, type: string }
+          - { name: supporting, label: Supporting figures, type: string }
+          - { name: context, label: Context, type: text }
+          - { name: period, label: Measurement period, type: string }

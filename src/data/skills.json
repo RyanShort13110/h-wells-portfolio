@@ -1,0 +1,29 @@
+[
+  {
+    "heading": "Writing & editing",
+    "items": [
+      "SEO copywriting",
+      "Website content development",
+      "Long-form writing",
+      "Short-form writing",
+      "Editing"
+    ]
+  },
+  {
+    "heading": "SEO & content strategy",
+    "items": [
+      "Keyword optimization",
+      "On-page SEO",
+      "Content marketing",
+      "Search-informed writing"
+    ]
+  },
+  {
+    "heading": "Publishing platforms",
+    "items": [
+      "WordPress",
+      "Drupal",
+      "Website content management"
+    ]
+  }
+]

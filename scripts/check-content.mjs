@@ -1,0 +1,23 @@
+import fs from 'node:fs';
+
+const read = (name) => JSON.parse(fs.readFileSync(new URL(`../src/data/${name}.json`, import.meta.url), 'utf8'));
+const site = read('site');
+const samples = read('samples');
+const skills = read('skills');
+const results = read('results');
+const fail = (message) => { console.error(`✖ ${message}`); process.exitCode = 1; };
+for (const field of ['name','role','headlineFirst','headlineAccent','introduction','email','linkedin']) {
+  if (!site[field]) fail(`Missing site.${field}`);
+}
+if (!Array.isArray(samples) || !samples.length) fail('No writing samples');
+else {
+  for (const [index,sample] of samples.entries()) {
+    if (!sample.title || !sample.client || !sample.url) fail(`Sample #${index+1} needs title, client, URL`);
+    try { if (!['https:', 'http:'].includes(new URL(sample.url).protocol)) throw new Error(); }
+    catch { fail(`Invalid URL for sample #${index+1}`); }
+  }
+  if (samples.filter(s=>s.spotlight).length !== 1) fail('Exactly one writing sample should have spotlight: true');
+}
+if (!Array.isArray(skills)) fail('Skills must be an array');
+if (!Array.isArray(results)) fail('Results must be an array');
+if (!process.exitCode) console.log(`✓ Valid content: ${samples.length} articles, ${skills.length} skill groups, ${results.length} result cards`);

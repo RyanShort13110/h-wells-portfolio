@@ -1,0 +1,285 @@
+---
+import '../styles/site.css';
+import site from '../data/site.json';
+import skills from '../data/skills.json';
+import samples from '../data/samples.json';
+import results from '../data/results.json';
+
+const spotlight = samples.find((sample) => sample.spotlight) ?? samples[0];
+const featured = samples.filter((sample) => sample.featured && sample !== spotlight).slice(0, 4);
+const clients = [...new Set(samples.map((sample) => sample.client))];
+const year = new Date().getFullYear();
+const external = { target: '_blank', rel: 'noopener noreferrer' };
+const headshot = site.headshot?.trim();
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#F7F5F0" />
+  <meta name="description" content={site.seoDescription} />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={site.seoTitle} />
+  <meta property="og:description" content={site.seoDescription} />
+  <title>{site.seoTitle}</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="progress" aria-hidden="true"><span data-progress></span></div>
+  <header class="site-header" id="top">
+    <div class="header-inner container">
+      <a href="#top" class="brand" aria-label={`${site.name}, back to top`}>
+        <span class="brand-mark" aria-hidden="true">h<span>.</span></span>
+        <span class="brand-name">{site.name}</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Open navigation" data-menu-toggle>
+        <span></span><span></span>
+      </button>
+      <nav id="site-nav" class="site-nav" aria-label="Main navigation">
+        <a href="#about">About</a>
+        <a href="#writing">Writing</a>
+        <a href="#results">SEO results</a>
+        <a class="nav-contact" href="#contact">Let's connect <span aria-hidden="true">↗</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-grain" aria-hidden="true"></div>
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="eyebrow-line"></span>{site.eyebrow}</p>
+          <h1 id="hero-title">{site.headlineFirst}<br /><em>{site.headlineAccent}</em></h1>
+          <p class="hero-intro">{site.introduction}</p>
+          <div class="hero-actions">
+            <a class="btn btn-dark" href="#writing">Explore my writing <span aria-hidden="true">↗</span></a>
+            <a class="text-link" href="#contact">Get in touch <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="hero-proof">
+            <span class="proof-decoration" aria-hidden="true">✳</span>
+            <span>Destination guides <b>·</b> SEO content <b>·</b> Editorial storytelling</span>
+          </div>
+        </div>
+        <aside class="hero-editorial" aria-label="Introduction to Helen's work">
+          <div class="card-art" aria-hidden="true">
+            <div class="art-circle art-circle-one"></div>
+            <div class="art-circle art-circle-two"></div>
+            <svg class="art-scribble" viewBox="0 0 280 230" fill="none" aria-hidden="true">
+              <path d="M52 167c58-99 153-159 179-102 23 49-133 100-142 31-6-48 70-62 104-30" stroke="#F7F5F0" stroke-width="2" stroke-linecap="round"/>
+              <path d="M194 65l-10-8m10 8 1-13" stroke="#F7F5F0" stroke-width="2" stroke-linecap="round" />
+            </svg>
+            <div class="art-stamp">WORDS<br />WITH<br />PURPOSE<span>.</span></div>
+          </div>
+          <div class="hero-editorial-caption">
+            <div>
+              <span class="mini-label">THE WRITING DESK</span>
+              <p>Clarity, curiosity, and a little creativity.</p>
+            </div>
+            <span class="hero-editorial-number">01 / 06</span>
+          </div>
+          <div class="hero-flower" aria-hidden="true">✳</div>
+        </aside>
+      </div>
+      <div class="hero-bottom-line" aria-hidden="true"><span>SCROLL TO EXPLORE</span><span>↓</span></div>
+    </section>
+
+    <section class="about section-pad" id="about" aria-labelledby="about-heading">
+      <div class="container about-grid">
+        <div class="about-visual" data-reveal>
+          <div class="portrait-frame">
+            {headshot ? <img src={headshot} alt="Portrait of Helen Wells" loading="lazy" /> : <div class="portrait-initials" aria-label="Helen Wells">H<span>W</span><i>.</i></div>}
+            <span class="portrait-caption">SEO · CONTENT · EDITORIAL</span>
+            <div class="portrait-orbit" aria-hidden="true"></div>
+          </div>
+          <div class="visual-label" aria-hidden="true">thoughtful words, lasting impact.</div>
+        </div>
+        <div class="about-copy" data-reveal>
+          <p class="section-kicker"><span>01</span> A LITTLE ABOUT ME</p>
+          <h2 id="about-heading">{site.aboutHeading}</h2>
+          <p class="body-large">{site.aboutBody}</p>
+          <blockquote><span aria-hidden="true">“</span>{site.aboutNote}<span aria-hidden="true">”</span></blockquote>
+          <a class="inline-arrow" href="#skills">A little more about my work <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="skills section-pad" id="skills" aria-labelledby="skills-heading">
+      <div class="container">
+        <div class="section-intro split-header" data-reveal>
+          <div>
+            <p class="section-kicker"><span>02</span> THE TOOLKIT</p>
+            <h2 id="skills-heading">A strong story needs<br /><em>the right skills.</em></h2>
+          </div>
+          <p>From the first keyword to the final edit, I bring strategy and clarity to the writing process.</p>
+        </div>
+        <div class="skills-grid">
+          {skills.map((group, index) => (
+            <article class="skill-group" data-reveal>
+              <span class="skill-index">0{index+1}</span>
+              <h3>{group.heading}</h3>
+              <ul>{group.items.map((skill) => <li>{skill}</li>)}</ul>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="writing section-pad" id="writing" aria-labelledby="writing-heading">
+      <div class="container">
+        <div class="section-intro writing-head" data-reveal>
+          <p class="section-kicker"><span>03</span> SELECTED WORK</p>
+          <h2 id="writing-heading">Some words of <em>mine.</em></h2>
+          <p>From destination guides to practical renter advice, here's a selection of published pieces across the topics I love to write about.</p>
+        </div>
+        <div class="spotlight" data-reveal>
+          <div class="spotlight-art" aria-hidden="true">
+            <div class="spotlight-sun"></div>
+            <div class="spotlight-wave wave-one"></div>
+            <div class="spotlight-wave wave-two"></div>
+            <div class="spotlight-wave wave-three"></div>
+            <span class="spotlight-art-label">FEATURED GUIDE<br/><strong>GRAYTON BEACH</strong></span>
+          </div>
+          <div class="spotlight-copy">
+            <p class="mini-label">FEATURED STORY / {spotlight.category.toUpperCase()}</p>
+            <h3>{spotlight.title}</h3>
+            <p>{spotlight.summary || 'A selected piece from my published writing portfolio.'}</p>
+            <div class="card-foot"><span>{spotlight.client}</span><a href={spotlight.url} {...external} aria-label={`Read ${spotlight.title} on ${spotlight.client}`}>Read the guide <span aria-hidden="true">↗</span></a></div>
+          </div>
+        </div>
+        <div class="featured-grid">
+          {featured.map((piece, index) => (
+            <article class="featured-card" data-reveal>
+              <div class="featured-card-top"><span>0{index+1} / {piece.category}</span><span aria-hidden="true">✳</span></div>
+              <h3>{piece.title}</h3>
+              <p>{piece.summary || 'Selected published writing'}</p>
+              <div class="featured-card-bottom"><span>{piece.client}</span><a href={piece.url} {...external} aria-label={`Read ${piece.title}`}><span aria-hidden="true">↗</span></a></div>
+            </article>
+          ))}
+        </div>
+
+        <div class="library" id="all-writing" data-reveal>
+          <div class="library-topline">
+            <div><p class="section-kicker muted-kicker">WRITING ARCHIVE</p><h3>More from the portfolio<span>.</span></h3></div>
+            <span class="library-count">{samples.length} published pieces · {clients.length} clients</span>
+          </div>
+          <p class="library-description">Browse by publication. Each link opens the original published article in a new tab.</p>
+          <div class="library-groups">
+            {clients.map((client, index) => {
+              const articles = samples.filter((piece) => piece.client === client);
+              return (
+                <details class="library-group" open={index === 0}>
+                  <summary><span class="library-number">0{index+1}</span><strong>{client}</strong><span class="library-piece-count">{articles.length} {articles.length===1?'piece':'pieces'}</span><span class="library-plus" aria-hidden="true"></span></summary>
+                  <ul>{articles.map((piece) => (
+                    <li><a href={piece.url} {...external}><span>{piece.title}</span><span class="library-link-arrow" aria-hidden="true">↗</span></a></li>
+                  ))}</ul>
+                </details>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="results section-pad" id="results" aria-labelledby="results-heading">
+      <div class="container">
+        <div class="section-intro results-intro" data-reveal>
+          <p class="section-kicker"><span>04</span> THE IMPACT</p>
+          <h2 id="results-heading">Good writing makes<br /><em>a measurable difference.</em></h2>
+          <p>A few search performance highlights from content work with Frias Properties of Aspen.</p>
+        </div>
+        <div class="results-grid">
+          {results.map((result) => (
+            <article class="result-card" data-reveal>
+              <p class="result-project">{result.project}</p>
+              <div class="result-big">{result.metric}</div>
+              <p class="result-unit">{result.unit}</p>
+              <div class="result-rule"></div>
+              <p class="result-support">{result.supporting}</p>
+              <p class="result-context">{result.context}</p>
+            </article>
+          ))}
+        </div>
+        <p class="results-disclaimer">September 2026 performance figures provided from team reporting. These reflect collaborative content and SEO efforts that Helen contributed to, rather than individual attribution.</p>
+      </div>
+    </section>
+
+    <section class="experience section-pad" id="experience" aria-labelledby="experience-heading">
+      <div class="container experience-grid">
+        <div data-reveal>
+          <p class="section-kicker"><span>05</span> EXPERIENCE</p>
+          <h2 id="experience-heading">{site.experienceHeading}</h2>
+        </div>
+        <div class="experience-card" data-reveal>
+          <div class="experience-dot" aria-hidden="true"></div>
+          <p class="experience-company">{site.experienceCompany}</p>
+          <p class="experience-focus">{site.experienceFocus}</p>
+          <p class="body-large">{site.experienceBody}</p>
+          <div class="experience-border" aria-hidden="true"></div>
+          <p class="experience-footer">Research-led content. A reader-first approach.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact section-pad" id="contact" aria-labelledby="contact-heading">
+      <div class="container contact-content" data-reveal>
+        <p class="section-kicker contact-kicker"><span>06</span> SAY HELLO</p>
+        <h2 id="contact-heading">Have a story<br />worth <em>telling?</em></h2>
+        <p>Whether you're looking for an SEO copywriter, a thoughtful content collaborator, or just want to connect, I'd love to hear from you.</p>
+        <div class="contact-actions">
+          <a class="btn btn-light" href={`mailto:${site.email}`}>Email me <span aria-hidden="true">↗</span></a>
+          <a class="contact-link" href={site.linkedin} {...external}>Connect on LinkedIn <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="contact-flower" aria-hidden="true">✳</div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="container footer-inner">
+      <a href="#top" class="footer-brand">{site.name}<span>.</span></a>
+      <p>Words with purpose. &copy; {year} {site.name}</p>
+      <a href="#top" class="back-top">Back to top ↑</a>
+    </div>
+  </footer>
+  <script>
+    const menu = document.querySelector('[data-menu-toggle]');
+    const nav = document.querySelector('#site-nav');
+    menu?.addEventListener('click', () => {
+      const expanded = menu.getAttribute('aria-expanded') === 'true';
+      menu.setAttribute('aria-expanded', String(!expanded));
+      menu.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
+      nav?.classList.toggle('is-open', !expanded);
+    });
+    nav?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
+      menu?.setAttribute('aria-expanded', 'false');
+      menu?.setAttribute('aria-label', 'Open navigation');
+      nav?.classList.remove('is-open');
+    }));
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!reducedMotion && 'IntersectionObserver' in window) {
+      document.documentElement.classList.add('js-reveal');
+      const observer = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      }, { threshold: .08, rootMargin: '0px 0px -26px 0px' });
+      document.querySelectorAll('[data-reveal]').forEach((el) => observer.observe(el));
+    }
+    const bar = document.querySelector('[data-progress]');
+    const updateProgress = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      if (bar instanceof HTMLElement) bar.style.width = `${max > 0 ? Math.min(100, window.scrollY / max * 100) : 0}%`;
+    };
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    window.addEventListener('resize', updateProgress);
+    updateProgress();
+  </script>
+</body>
+</html>
