@@ -1,155 +1,143 @@
 [
   {
-    "client": "Homeowner's Collection",
     "title": "Where Is Seaside, Florida?",
+    "client": "Homeowner's Collection",
     "url": "https://www.homeownerscollection.com/blog/seaside/where-seaside-florida",
-    "category": "Destination guides",
+    "category": "Blog",
+    "summary": "A helpful introduction to one of Florida's best-known beach communities.",
     "featured": true,
-    "spotlight": false,
-    "summary": "A helpful introduction to one of Florida's best-known beach communities."
+    "spotlight": false
   },
   {
-    "client": "Homeowner's Collection",
     "title": "Your Guide to Things to Do in Seaside, Florida",
+    "client": "Homeowner's Collection",
     "url": "https://www.homeownerscollection.com/blog/seaside/your-guide-things-do-seaside-florida",
     "category": "Destination guides",
     "featured": false,
-    "spotlight": false,
-    "summary": ""
+    "spotlight": false
   },
   {
-    "client": "Homeowner's Collection",
     "title": "How to Get Around Seaside, Florida",
+    "client": "Homeowner's Collection",
     "url": "https://www.homeownerscollection.com/blog/seaside/getting-around-seaside-fl",
-    "category": "Destination guides",
+    "category": "Blog",
     "featured": false,
-    "spotlight": false,
-    "summary": ""
+    "spotlight": false
   },
   {
-    "client": "Homeowner's Collection",
     "title": "Your Guide to Seaside's Bike Paths and Hidden Treasures",
+    "client": "Homeowner's Collection",
     "url": "https://www.homeownerscollection.com/blog/seaside/your-guide-seasides-bike-paths-and-hidden-treasures",
     "category": "Destination guides",
     "featured": false,
-    "spotlight": false,
-    "summary": ""
+    "spotlight": false
   },
   {
-    "client": "Royal Destinations",
     "title": "Plan Your Grayton Beach Vacation – Area Guide",
+    "client": "Royal Destinations",
     "url": "https://www.royaldestinations.com/plan-your-grayton-beach-vacation",
     "category": "Area guides",
+    "summary": "A destination-focused area guide designed to help travelers get to know Grayton Beach.",
     "featured": true,
-    "spotlight": true,
-    "summary": "A destination-focused area guide designed to help travelers get to know Grayton Beach."
+    "spotlight": true
   },
   {
-    "client": "New England Vacation Rentals",
     "title": "Things to Do in Yarmouth, MA: A First-Time Visitor's Guide",
+    "client": "New England Vacation Rentals",
     "url": "https://newenglandvacationrentals.com/blog/things-to-do-in-yarmouth-ma-a-first-time-visitors-guide/",
     "category": "Destination guides",
     "featured": false,
-    "spotlight": false,
-    "summary": ""
+    "spotlight": false
   },
   {
-    "client": "New England Vacation Rentals",
     "title": "Best Restaurants in Sandwich, MA",
-    "url": "https://newenglandvacationrentals.com/blog/best-restaurants-in-sandwich-ma/",
-    "category": "Destination guides",
-    "featured": false,
-    "spotlight": false,
-    "summary": ""
-  },
-  {
     "client": "New England Vacation Rentals",
-    "title": "Where to Watch Cape Cod 4th of July Fireworks",
-    "url": "https://newenglandvacationrentals.com/blog/where-to-watch-cape-cod-4th-of-july-fireworks/",
-    "category": "Destination guides",
+    "url": "https://newenglandvacationrentals.com/blog/best-restaurants-in-sandwich-ma/",
+    "category": "Destination Bali",
     "featured": false,
-    "spotlight": false,
-    "summary": ""
+    "spotlight": false
   },
   {
-    "client": "Frias Properties of Aspen",
+    "title": "Where to Watch Cape Cod 4th of July Fireworks",
+    "client": "New England Vacation Rentals",
+    "url": "https://newenglandvacationrentals.com/blog/where-to-watch-cape-cod-4th-of-july-fireworks/",
+    "category": "Seasonal content",
+    "featured": false,
+    "spotlight": false
+  },
+  {
     "title": "Aspen Fall Activity Guide",
+    "client": "Frias Properties of Aspen",
     "url": "https://www.friasproperties.com/blog/aspen-fall-activity-guide",
     "category": "Seasonal content",
+    "summary": "Seasonal travel content with a focus on Aspen's fall experiences.",
     "featured": true,
-    "spotlight": false,
-    "summary": "Seasonal travel content with a focus on Aspen's fall experiences."
+    "spotlight": false
   },
   {
-    "client": "Frias Properties of Aspen",
     "title": "Aspen in September and October: Why Aspen Highlands Is the Ideal Autumn Getaway",
+    "client": "Frias Properties of Aspen",
     "url": "https://www.friasproperties.com/blog/aspen-september-and-october-why-aspen-highlands-ideal-autumn-getaway",
     "category": "Seasonal content",
     "featured": false,
-    "spotlight": false,
-    "summary": ""
+    "spotlight": false
   },
   {
-    "client": "Frias Properties of Aspen",
     "title": "Family Christmas in Aspen: Events, Ski School, and What to Reserve First",
+    "client": "Frias Properties of Aspen",
     "url": "https://www.friasproperties.com/blog/perfect-family-christmas-aspen",
     "category": "Seasonal content",
     "featured": false,
-    "spotlight": false,
-    "summary": ""
+    "spotlight": false
   },
   {
-    "client": "Paramount Destinations",
     "title": "Remote Work in the Outer Banks: The Ultimate Workcation Guide",
+    "client": "Paramount Destinations",
     "url": "https://paramountdestinations.com/blog/benefits-of-working-remotely-on-obx/",
-    "category": "Lifestyle articles",
+    "category": "Lifestyle blogs",
+    "summary": "A lifestyle-meets-travel piece about working remotely from the Outer Banks.",
     "featured": true,
-    "spotlight": false,
-    "summary": "A lifestyle-meets-travel piece about working remotely from the Outer Banks."
+    "spotlight": false
   },
   {
-    "client": "Paramount Destinations",
     "title": "Why the Outer Banks Is Perfect for Multi-Generational Family Vacations",
+    "client": "Paramount Destinations",
     "url": "https://paramountdestinations.com/blog/why-the-outer-banks-is-perfect-for-multi-generational-family-vacations/",
-    "category": "Lifestyle articles",
+    "category": "Lifestyle blogs",
     "featured": false,
-    "spotlight": false,
-    "summary": ""
+    "spotlight": false
   },
   {
-    "client": "Paramount Destinations",
     "title": "3-Day Itinerary to OBX: Your Guide to a Long Weekend Vacation",
+    "client": "Paramount Destinations",
     "url": "https://paramountdestinations.com/blog/3-day-itinerary-to-obx-your-guide-to-a-long-weekend-vacation/",
     "category": "Destination guides",
     "featured": false,
-    "spotlight": false,
-    "summary": ""
+    "spotlight": false
   },
   {
-    "client": "Apartments.com",
     "title": "How to Advocate for Lower Rent",
+    "client": "Apartments.com",
     "url": "https://www.apartments.com/blog/how-to-advocate-for-lower-rent",
-    "category": "Renter education",
+    "category": "Renter education blogs",
+    "summary": "Practical guidance for renters navigating affordability conversations.",
     "featured": true,
-    "spotlight": false,
-    "summary": "Practical guidance for renters navigating affordability conversations."
+    "spotlight": false
   },
   {
-    "client": "Apartments.com",
     "title": "How to Navigate a Rent Analysis Report",
+    "client": "Apartments.com",
     "url": "https://www.apartments.com/rental-manager/resources/property-management/rent-analysis-report",
-    "category": "Renter education",
+    "category": "Renter education blogs",
     "featured": false,
-    "spotlight": false,
-    "summary": ""
+    "spotlight": false
   },
   {
-    "client": "Apartments.com",
     "title": "How to Store Holiday Decor in a Small Space",
+    "client": "Apartments.com",
     "url": "https://www.apartments.com/blog/how-to-store-holiday-decor-in-a-small-space",
-    "category": "Lifestyle articles",
+    "category": "Lifestyle blogs",
     "featured": false,
-    "spotlight": false,
-    "summary": ""
+    "spotlight": false
   }
 ]
