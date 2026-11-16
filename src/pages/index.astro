@@ -5,6 +5,7 @@ import skills from '../data/skills.json';
 import samples from '../data/samples.json';
 import results from '../data/results.json';
 import sections from '../data/sections.json';
+import experience from '../data/experience.json';
 
 // Pages CMS uses independent checkboxes for spotlight articles. If more than one
 // is checked, show the first checked article rather than breaking the deployment.
@@ -12,6 +13,7 @@ import sections from '../data/sections.json';
 const spotlight = samples.find((sample) => sample.spotlight)
   ?? samples.find((sample) => sample.featured)
   ?? samples[0];
+const hasSamples = samples.length > 0;
 // Show every selected feature; an editor should not have to change code to add one.
 const featured = samples.filter((sample) => sample.featured && sample !== spotlight);
 // Artwork follows the chosen article. Helen can optionally specify short artwork
@@ -23,6 +25,7 @@ const clients = [...new Set(samples.map((sample) => sample.client))];
 const year = new Date().getFullYear();
 const external = { target: '_blank', rel: 'noopener noreferrer' };
 const headshot = site.headshot?.trim();
+const linkedinHref = /^https?:\/\//i.test(site.linkedin?.trim() || '') ? site.linkedin.trim() : null;
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString();
 const personSchema = {
   '@context': 'https://schema.org',
@@ -122,7 +125,7 @@ const resumeHref = /^\/documents\/[a-zA-Z0-9_\-./%]+\.pdf$/i.test(resumePath) &&
           <div class="hero-editorial-caption">
             <div>
               <span class="mini-label">THE WRITING DESK</span>
-              <p>Clarity, curiosity, and a little creativity.</p>
+              <p>{sections.writingDeskText ?? 'Strategy, clarity, and creativity in every word.'}</p>
             </div>
             <span class="hero-editorial-number">01 / 06</span>
           </div>
@@ -143,16 +146,16 @@ const resumeHref = /^\/documents\/[a-zA-Z0-9_\-./%]+\.pdf$/i.test(resumePath) &&
         </div>
         <div class="about-copy" data-reveal>
           <p class="section-kicker"><span>01</span> A LITTLE ABOUT ME</p>
-          <h2 id="about-heading">{site.aboutHeading}</h2>
-          <p class="body-large">{site.aboutBody}</p>
+          <h2 id="about-heading">{site.aboutHeading || 'A little about me'}</h2>
+          {site.aboutBody && <p class="body-large">{site.aboutBody}</p>}
           {site.education && <p class="about-education"><strong>Education</strong> {site.education}</p>}
-          <blockquote><span aria-hidden="true">“</span>{site.aboutNote}<span aria-hidden="true">”</span></blockquote>
-          <a class="inline-arrow" href="#skills">A little more about my work <span aria-hidden="true">↗</span></a>
+          {site.aboutNote && <blockquote><span aria-hidden="true">“</span>{site.aboutNote}<span aria-hidden="true">”</span></blockquote>}
+          {skills.length > 0 && <a class="inline-arrow" href="#skills">A little more about my work <span aria-hidden="true">↗</span></a>}
         </div>
       </div>
     </section>
 
-    <section class="skills section-pad" id="skills" aria-labelledby="skills-heading">
+    {skills.length > 0 && <section class="skills section-pad" id="skills" aria-labelledby="skills-heading">
       <div class="container">
         <div class="section-intro split-header" data-reveal>
           <div>
@@ -166,21 +169,21 @@ const resumeHref = /^\/documents\/[a-zA-Z0-9_\-./%]+\.pdf$/i.test(resumePath) &&
             <article class="skill-group" data-reveal>
               <span class="skill-index">0{index+1}</span>
               <h3>{group.heading}</h3>
-              <ul>{group.items.map((skill) => <li>{skill}</li>)}</ul>
+              {Array.isArray(group.items) && group.items.length > 0 && <ul>{group.items.map((skill) => <li>{skill}</li>)}</ul>}
             </article>
           ))}
         </div>
       </div>
-    </section>
+    </section>}
 
     <section class="writing section-pad" id="writing" aria-labelledby="writing-heading">
       <div class="container">
         <div class="section-intro writing-head" data-reveal>
           <p class="section-kicker"><span>03</span> SELECTED WORK</p>
-          <h2 id="writing-heading">Some words of <em>mine.</em></h2>
+          <h2 id="writing-heading">{sections.writingHeadingFirst ?? 'A selection of'} {sections.writingHeadingAccent && <em>{sections.writingHeadingAccent}</em>}</h2>
           <p>From destination guides to practical renter advice, here's a selection of published pieces across the topics I love to write about.</p>
         </div>
-        <div class="spotlight" data-reveal>
+        {spotlight && <div class="spotlight" data-reveal>
           <div class="spotlight-art" aria-hidden="true">
             <div class="spotlight-sun"></div>
             <div class="spotlight-wave wave-one"></div>
@@ -194,8 +197,8 @@ const resumeHref = /^\/documents\/[a-zA-Z0-9_\-./%]+\.pdf$/i.test(resumePath) &&
             <p>{spotlight.summary || 'A selected piece from my published writing portfolio.'}</p>
             <div class="card-foot"><span>{spotlight.client}</span><a href={spotlight.url} {...external} aria-label={`Read ${spotlight.title} on ${spotlight.client}`}>Read the article <span aria-hidden="true">↗</span></a></div>
           </div>
-        </div>
-        <div class="featured-grid">
+        </div>}
+        {featured.length > 0 && <div class="featured-grid">
           {featured.map((piece, index) => (
             <article class="featured-card" data-reveal>
               <div class="featured-card-top"><span>0{index+1} / {piece.category}</span><span aria-hidden="true">✳</span></div>
@@ -204,9 +207,10 @@ const resumeHref = /^\/documents\/[a-zA-Z0-9_\-./%]+\.pdf$/i.test(resumePath) &&
               <div class="featured-card-bottom"><span>{piece.client}</span><a href={piece.url} {...external} aria-label={`Read ${piece.title}`}><span aria-hidden="true">↗</span></a></div>
             </article>
           ))}
-        </div>
+        </div>}
+        {!hasSamples && <p class="writing-empty">New writing samples will appear here soon.</p>}
 
-        <div class="library" id="all-writing" data-reveal>
+        {hasSamples && <div class="library" id="all-writing" data-reveal>
           <div class="library-topline">
             <div><p class="section-kicker muted-kicker">WRITING ARCHIVE</p><h3>More from the portfolio<span>.</span></h3></div>
             <span class="library-count">{samples.length} published pieces · {clients.length} clients</span>
@@ -225,49 +229,57 @@ const resumeHref = /^\/documents\/[a-zA-Z0-9_\-./%]+\.pdf$/i.test(resumePath) &&
               );
             })}
           </div>
-        </div>
+        </div>}
       </div>
     </section>
 
-    <section class="results section-pad" id="results" aria-labelledby="results-heading">
+    {(results.length > 0 || sections.resultsIntro || sections.resultsDisclaimer) && <section class="results section-pad" id="results" aria-labelledby="results-heading">
       <div class="container">
         <div class="section-intro results-intro" data-reveal>
           <p class="section-kicker"><span>04</span> THE IMPACT</p>
-          <h2 id="results-heading">Good writing makes<br /><em>a measurable difference.</em></h2>
-          <p>{sections.resultsIntro}</p>
+          <h2 id="results-heading">{sections.resultsHeadingFirst ?? 'Content that delivers'}{sections.resultsHeadingAccent && <><br /><em>{sections.resultsHeadingAccent}</em></>}</h2>
+          {sections.resultsIntro && <p>{sections.resultsIntro}</p>}
         </div>
         <div class="results-grid">
           {results.map((result) => (
             <article class="result-card" data-reveal>
               <p class="result-project">{result.project}</p>
               <div class="result-big">{result.metric}</div>
-              <p class="result-unit">{result.unit}</p>
+              {result.unit && <p class="result-unit">{result.unit}</p>}
               <div class="result-rule"></div>
-              <p class="result-support">{result.supporting}</p>
-              <p class="result-context">{result.context}</p>
+              {result.supporting && <p class="result-support">{result.supporting}</p>}
+              {result.context && <p class="result-context">{result.context}</p>}
             </article>
           ))}
         </div>
-        <p class="results-disclaimer">{sections.resultsDisclaimer}</p>
+        {sections.resultsDisclaimer && <p class="results-disclaimer">{sections.resultsDisclaimer}</p>}
       </div>
-    </section>
+    </section>}
 
-    <section class="experience section-pad" id="experience" aria-labelledby="experience-heading">
+    {experience.length > 0 && <section class="experience section-pad" id="experience" aria-labelledby="experience-heading">
       <div class="container experience-grid">
         <div data-reveal>
           <p class="section-kicker"><span>05</span> EXPERIENCE</p>
-          <h2 id="experience-heading">{site.experienceHeading}</h2>
+          <h2 id="experience-heading">{site.experienceHeading || 'Professional experience'}</h2>
         </div>
-        <div class="experience-card" data-reveal>
-          <div class="experience-dot" aria-hidden="true"></div>
-          <p class="experience-company">{site.experienceCompany}</p>
-          <p class="experience-focus">{site.experienceFocus}</p>
-          <p class="body-large">{site.experienceBody}</p>
-          <div class="experience-border" aria-hidden="true"></div>
-          <p class="experience-footer">Research-led content. A reader-first approach.</p>
+        <div class="experience-cards">
+          {experience.map((job) => (
+            <article class="experience-card" data-reveal>
+              <div class="experience-dot" aria-hidden="true"></div>
+              <h3 class="experience-company">{job.company}</h3>
+              <p class="experience-role">{job.title}</p>
+              {job.dates && <p class="experience-dates">{job.dates}</p>}
+              {job.focus && <p class="experience-focus">{job.focus}</p>}
+              <p class="body-large">{job.body}</p>
+              {job.footer && <>
+                <div class="experience-border" aria-hidden="true"></div>
+                <p class="experience-footer">{job.footer}</p>
+              </>}
+            </article>
+          ))}
         </div>
       </div>
-    </section>
+    </section>}
 
     <section class="contact section-pad" id="contact" aria-labelledby="contact-heading">
       <div class="container contact-content" data-reveal>
@@ -276,7 +288,7 @@ const resumeHref = /^\/documents\/[a-zA-Z0-9_\-./%]+\.pdf$/i.test(resumePath) &&
         <p>Whether you're looking for an SEO copywriter, a thoughtful content collaborator, or just want to connect, I'd love to hear from you.</p>
         <div class="contact-actions">
           <a class="btn btn-light" href={`mailto:${site.email}`}>Email me <span aria-hidden="true">↗</span></a>
-          <a class="contact-link" href={site.linkedin} {...external}>Connect on LinkedIn <span aria-hidden="true">↗</span></a>
+          {linkedinHref && <a class="contact-link" href={linkedinHref} {...external}>Connect on LinkedIn <span aria-hidden="true">↗</span></a>}
           {resumeHref && <a class="btn btn-resume-light" href={resumeHref} download>Download résumé <span aria-hidden="true">↓</span></a>}
         </div>
         <div class="contact-flower" aria-hidden="true">✳</div>

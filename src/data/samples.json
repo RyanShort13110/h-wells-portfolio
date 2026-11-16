@@ -137,7 +137,7 @@
     "client": "Apartments.com",
     "url": "https://www.apartments.com/blog/how-to-store-holiday-decor-in-a-small-space",
     "category": "Lifestyle blogs",
-    "featured": false,
+    "featured": true,
     "spotlight": false
   }
 ]
