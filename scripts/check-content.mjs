@@ -7,7 +7,7 @@ const skills = read('skills');
 const results = read('results');
 const sections = read('sections');
 const fail = (message) => { console.error(`✖ ${message}`); process.exitCode = 1; };
-for (const field of ['name','role','headlineFirst','headlineAccent','introduction','email','linkedin','seoTitle','seoDescription']) {
+for (const field of ['name','role','headlineFirst', 'introduction','email','linkedin','seoTitle','seoDescription']) {
   if (!site[field]) fail(`Missing site.${field}`);
 }
 if (site.resumeFile) {

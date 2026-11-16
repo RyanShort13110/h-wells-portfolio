@@ -93,7 +93,11 @@ const resumeHref = /^\/documents\/[a-zA-Z0-9_\-./%]+\.pdf$/i.test(resumePath) &&
       <div class="container hero-grid">
         <div class="hero-copy">
           <p class="eyebrow"><span class="eyebrow-line"></span>{site.eyebrow}</p>
-          <h1 id="hero-title">{site.headlineFirst}<br /><em>{site.headlineAccent}</em></h1>
+          <h1 id="hero-title">
+            {site.headlineFirst}
+            {site.headlineAccent?.trim() && <br />}
+            {site.headlineAccent?.trim() && <em>{site.headlineAccent}</em>}
+          </h1>
           <p class="hero-intro">{site.introduction}</p>
           <div class="hero-actions">
             <a class="btn btn-dark" href="#writing">Explore my writing <span aria-hidden="true">↗</span></a>
