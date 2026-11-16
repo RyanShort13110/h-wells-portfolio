@@ -146,7 +146,7 @@ const resumeHref = /^\/documents\/[a-zA-Z0-9_\-./%]+\.pdf$/i.test(resumePath) &&
         </div>
         <div class="about-copy" data-reveal>
           <p class="section-kicker"><span>01</span> A LITTLE ABOUT ME</p>
-          {site.aboutHeading && <h2 id="about-heading">{site.aboutHeading}</h2>}
+          <h2 id="about-heading">{site.aboutHeading || 'A little about me'}</h2>
           {site.aboutBody && <p class="body-large">{site.aboutBody}</p>}
           {site.education && <p class="about-education"><strong>Education</strong> {site.education}</p>}
           {site.aboutNote && <blockquote><span aria-hidden="true">“</span>{site.aboutNote}<span aria-hidden="true">”</span></blockquote>}
