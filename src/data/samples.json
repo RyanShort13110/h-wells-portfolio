@@ -3,7 +3,7 @@
     "title": "Where Is Seaside, Florida?",
     "client": "Homeowner's Collection",
     "url": "https://www.homeownerscollection.com/blog/seaside/where-seaside-florida",
-    "category": "Blog",
+    "category": "Destination blogs",
     "summary": "A helpful introduction to one of Florida's best-known beach communities.",
     "featured": true,
     "spotlight": false
@@ -20,7 +20,7 @@
     "title": "How to Get Around Seaside, Florida",
     "client": "Homeowner's Collection",
     "url": "https://www.homeownerscollection.com/blog/seaside/getting-around-seaside-fl",
-    "category": "Blog",
+    "category": "Destination blogs",
     "featured": false,
     "spotlight": false
   },
@@ -53,7 +53,7 @@
     "title": "Best Restaurants in Sandwich, MA",
     "client": "New England Vacation Rentals",
     "url": "https://newenglandvacationrentals.com/blog/best-restaurants-in-sandwich-ma/",
-    "category": "Destination Bali",
+    "category": "Destination blogs",
     "featured": false,
     "spotlight": false
   },
